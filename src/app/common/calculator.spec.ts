@@ -33,11 +33,23 @@ const itShowsHowPureMocksWork = () => {
   expect(addMock).toHaveBeenCalledWith(5, 5);
 };
 
+const itShowsHowMockClearingWorks = () => {
+  const spy = vi.spyOn(calculator, 'add');
+  const result = calculator.add(2, 3);
+  expect(result).toBe(5);
+  expect(spy).toHaveBeenCalledOnce();
+  spy.mockClear();
+  const result2 = calculator.add(5, 5);
+  expect(result2).toBe(10);
+  expect(spy).toHaveBeenCalledOnce();
+};
+
 const fundamentalsTests = () => {
   it('should add two numbers', itShouldAddTwoNumbers);
   it('shows how spies work', itShowsHowSpiesWork);
   it('shows how mocking works', itShowsHowMockingWorks);
-  it.only('shows how a pure mock works', itShowsHowPureMocksWork);
+  it('shows how a pure mock works', itShowsHowPureMocksWork);
+  it.only('shows how mock clearing works', itShowsHowMockClearingWorks);
 };
 
 describe('Vitest Fundamentals', fundamentalsTests);
