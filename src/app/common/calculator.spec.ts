@@ -1,23 +1,22 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, Mock } from 'vitest';
 import { calculator } from './calculator';
 
-const describeIf = describe.skipIf(true);
-
-const fundamentalsTests = () => {
-  it.only('should add two numbers', () => {
-    const result = calculator.add(2, 3);
-    expect(result).toBe(5);
-  });
-
-  it.skip('should add two numbers v2', () => {
-    const result = calculator.add(2, 3);
-    expect(result).toBe(5);
-  });
-
-  it('should add two numbers v3', () => {
-    const result = calculator.add(2, 3);
-    expect(result).toBe(5);
-  });
+const itShouldAddTwoNumbers = () => {
+  const result = calculator.add(2, 3);
+  expect(result).toBe(5);
 };
 
-describeIf('Vitest Fundamentals', fundamentalsTests);
+const itShowsHowSpiesWork = () => {
+  const spy = vi.spyOn(calculator, 'add');
+  const result = calculator.add(2, 3);
+  expect(result).toBe(5);
+  expect(spy).toHaveBeenCalledOnce();
+  expect(spy).toHaveBeenCalledWith(2, 3);
+};
+
+const fundamentalsTests = () => {
+  it.skip('should add two numbers', itShouldAddTwoNumbers);
+  it('shows how spies work', itShowsHowSpiesWork);
+};
+
+describe('Vitest Fundamentals', fundamentalsTests);
