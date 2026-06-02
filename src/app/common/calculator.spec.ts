@@ -44,12 +44,51 @@ const itShowsHowMockClearingWorks = () => {
   expect(spy).toHaveBeenCalledOnce();
 };
 
+const itShowsHowMockResetWorksForSpies = () => {
+  // Create spy/mock
+  const spy = vi.spyOn(calculator, 'add').mockReturnValue(10);
+
+  // Call method 1st time
+  const result = calculator.add(2, 3);
+  expect(result).toBe(10);
+  expect(spy).toHaveBeenCalledOnce();
+
+  // Reset
+  spy.mockReset();
+
+  // Call method 2nd time - mock is gone and original function is called
+  const result2 = calculator.add(2, 3);
+  expect(result2).toBe(5);
+  expect(spy).toHaveBeenCalledOnce();
+};
+
+const itShowsHowMockResetWorksForPureMocks = () => {
+  // Create pure mock
+  const addMock = vi.fn().mockReturnValue(10);
+
+  // Call method 1st time
+  const result = addMock(5, 5);
+  expect(result).toBe(10);
+  expect(addMock).toHaveBeenCalledOnce();
+  expect(addMock).toHaveBeenCalledWith(5, 5);
+
+  // Reset
+  addMock.mockReset();
+
+  // Call method 2nd time - need to call mockReturnValue() again
+  const result2 = addMock(5, 5);
+  expect(result2).toBe(undefined);
+  expect(addMock).toHaveBeenCalledOnce();
+};
+
 const fundamentalsTests = () => {
-  it('should add two numbers', itShouldAddTwoNumbers);
-  it('shows how spies work', itShowsHowSpiesWork);
-  it('shows how mocking works', itShowsHowMockingWorks);
-  it('shows how a pure mock works', itShowsHowPureMocksWork);
-  it.only('shows how mock clearing works', itShowsHowMockClearingWorks);
+  it.skip('should add two numbers', itShouldAddTwoNumbers);
+  it.skip('shows how spies work', itShowsHowSpiesWork);
+  it.skip('shows how mocking works', itShowsHowMockingWorks);
+  it.skip('shows how a pure mock works', itShowsHowPureMocksWork);
+  it.skip('shows how mock clearing works', itShowsHowMockClearingWorks);
+  it('shows how mockReset() works for spies', itShowsHowMockResetWorksForSpies);
+  it('shows how mockReset() works for pure mocks', itShowsHowMockResetWorksForPureMocks);
 };
 
 describe('Vitest Fundamentals', fundamentalsTests);
