@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, Mock } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { calculator } from './calculator';
 
 const itShouldAddTwoNumbers = () => {
@@ -93,13 +93,13 @@ const itShowsHowMockRestoreWorks = () => {
 };
 
 const fundamentalsTests = () => {
-  it.skip('should add two numbers', itShouldAddTwoNumbers);
-  it.skip('shows how spies work', itShowsHowSpiesWork);
-  it.skip('shows how mocking works', itShowsHowMockingWorks);
-  it.skip('shows how a pure mock works', itShowsHowPureMocksWork);
-  it.skip('shows how mock clearing works', itShowsHowMockClearingWorks);
-  it.skip('shows how mockReset() works for spies', itShowsHowMockResetWorksForSpies);
-  it.skip('shows how mockReset() works for pure mocks', itShowsHowMockResetWorksForPureMocks);
+  it('should add two numbers', itShouldAddTwoNumbers);
+  it('shows how spies work', itShowsHowSpiesWork);
+  it('shows how mocking works', itShowsHowMockingWorks);
+  it('shows how a pure mock works', itShowsHowPureMocksWork);
+  it('shows how mock clearing works', itShowsHowMockClearingWorks);
+  it('shows how mockReset() works for spies', itShowsHowMockResetWorksForSpies);
+  it('shows how mockReset() works for pure mocks', itShowsHowMockResetWorksForPureMocks);
   it('shows how mockRestore() works', itShowsHowMockRestoreWorks);
 };
 
