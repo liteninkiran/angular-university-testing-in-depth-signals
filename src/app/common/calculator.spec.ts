@@ -24,10 +24,20 @@ const itShowsHowMockingWorks = () => {
   expect(result2).toBe(5);
 };
 
+const itShowsHowPureMocksWork = () => {
+  const addMock = vi.fn().mockReturnValue(10);
+  // const result = addMock(5, 5, 5);
+  const result = addMock(5, 5);
+  expect(result).toBe(10);
+  expect(addMock).toHaveBeenCalledOnce();
+  expect(addMock).toHaveBeenCalledWith(5, 5);
+};
+
 const fundamentalsTests = () => {
   it('should add two numbers', itShouldAddTwoNumbers);
   it('shows how spies work', itShowsHowSpiesWork);
-  it.only('shows how mocking works', itShowsHowMockingWorks);
+  it('shows how mocking works', itShowsHowMockingWorks);
+  it.only('shows how a pure mock works', itShowsHowPureMocksWork);
 };
 
 describe('Vitest Fundamentals', fundamentalsTests);
