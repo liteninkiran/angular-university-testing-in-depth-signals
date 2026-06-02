@@ -1,9 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { HelloWorld } from '../hello-world/hello-world';
 
 @Component({
   selector: 'about-us',
-  imports: [HelloWorld],
+  imports: [],
   templateUrl: './about-us.html',
   styleUrl: './about-us.scss',
 })
