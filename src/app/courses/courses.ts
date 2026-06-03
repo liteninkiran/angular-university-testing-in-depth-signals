@@ -23,7 +23,6 @@ export class Courses implements OnInit {
   ];
 
   beginnerCourses = computed(() => this.allCourses().filter((c) => c.category === 'BEGINNER'));
-
   advancedCourses = computed(() => this.allCourses().filter((c) => c.category === 'ADVANCED'));
 
   ngOnInit() {
