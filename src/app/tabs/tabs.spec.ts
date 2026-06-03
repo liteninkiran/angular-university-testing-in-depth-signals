@@ -1,6 +1,6 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { describe, it, beforeEach, expect } from 'vitest';
+import { describe, it, beforeEach, expect, vi } from 'vitest';
 import { TabsComponent } from './tabs';
 import { TabData } from './tabs.model';
 import { MOCK_TABS } from '../testing/testing-data';
@@ -12,6 +12,15 @@ describe('TabsComponent', () => {
   let de: DebugElement;
 
   const mockTabs: TabData[] = MOCK_TABS;
+
+  const clickAdvancedTab = () => clickTab('.tab-link:last-child');
+  const clickBeginnerTab = () => clickTab('.tab-link:first-child');
+
+  const clickTab = (selector: string) => {
+    const button = de.query(By.css(selector));
+    button.nativeElement.click();
+    fixture.detectChanges();
+  };
 
   const createComponent = async () => {
     const moduleDef = { imports: [TabsComponent] };
@@ -41,11 +50,16 @@ describe('TabsComponent', () => {
     expect(button.nativeElement.classList).toContain('active');
   };
 
-  const itShouldEmitWhenTabIsClicked = () => {
-    const button = de.query(By.css('.tab-link:last-child'));
-    button.nativeElement.click();
-    fixture.detectChanges();
+  const itShouldEmitActiveTabWhenTabIsClicked = () => {
+    clickAdvancedTab();
     expect(component.activeTab()).toBe('advanced');
+  };
+
+  const itShouldEmitTabChangedWhenTabIsClicked = () => {
+    const emitSpy = vi.spyOn(component.tabChanged, 'emit');
+    clickAdvancedTab();
+    expect(emitSpy).toHaveBeenCalledWith('advanced');
+    expect(emitSpy).toHaveBeenCalledOnce();
   };
 
   beforeEach(createComponent);
@@ -53,5 +67,6 @@ describe('TabsComponent', () => {
   it('should create the tabs component', itShouldCreateTheComponent);
   it('should render the correct number of tab buttons', itShouldRenderCorrectNumberOfTabs);
   it('should apply the active class to the selected tab', itShouldApplyTheActiveClass);
-  it('should emit activeTab when a tab is clicked', itShouldEmitWhenTabIsClicked);
+  it('should emit activeTab when a tab is clicked', itShouldEmitActiveTabWhenTabIsClicked);
+  it('should emit tabChanged when a tab is clicked', itShouldEmitTabChangedWhenTabIsClicked);
 });
