@@ -35,6 +35,6 @@ export class Courses implements OnInit {
   }
 
   onTabChanged(newTab: CourseCategory) {
-    this.activeTab.set(newTab);
+    // this.activeTab.set(newTab);
   }
 }

@@ -34,8 +34,16 @@ describe('TabsComponent', () => {
     expect(buttons[1].nativeElement.textContent.trim()).toBe('Advanced');
   };
 
+  const itShouldApplyTheActiveClass = () => {
+    fixture.componentRef.setInput('activeTab', 'advanced');
+    fixture.detectChanges();
+    const button = de.query(By.css('.tab-link:last-child'));
+    expect(button.nativeElement.classList).toContain('active');
+  };
+
   beforeEach(createComponent);
 
   it('should create the tabs component', itShouldCreateTheComponent);
   it('should render the correct number of tab buttons', itShouldRenderCorrectNumberOfTabs);
+  it('should apply the active class to the selected tab', itShouldApplyTheActiveClass);
 });
