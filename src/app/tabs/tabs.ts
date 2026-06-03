@@ -1,6 +1,7 @@
 import { Component, input, output, model } from '@angular/core';
 import { TabData } from './tabs.model';
 import { CourseCategory } from '../model/course';
+
 @Component({
   selector: 'tabs',
   imports: [],
@@ -9,9 +10,7 @@ import { CourseCategory } from '../model/course';
 })
 export class TabsComponent {
   tabs = input.required<TabData[]>();
-
   tabChanged = output<CourseCategory>();
-
   activeTab = model<string>();
 
   selectTab(val: any) {
