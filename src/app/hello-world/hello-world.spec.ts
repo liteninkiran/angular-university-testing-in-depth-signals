@@ -27,6 +27,7 @@ describe.only('HelloWorld', () => {
   it('should display the message', () => {
     const h1 = el.querySelector('h1');
     expect(h1).toBeDefined();
+    debugger;
     expect(h1?.textContent).toEqual(component.message);
   });
 });
