@@ -10,9 +10,10 @@ describe('TabsComponent', () => {
   let component: TabsComponent;
   let fixture: ComponentFixture<TabsComponent>;
   let de: DebugElement;
+
   const mockTabs: TabData[] = MOCK_TABS;
 
-  beforeEach(async () => {
+  const createComponent = async () => {
     const moduleDef = { imports: [TabsComponent] };
     await TestBed.configureTestingModule(moduleDef).compileComponents();
     fixture = TestBed.createComponent(TabsComponent);
@@ -20,16 +21,21 @@ describe('TabsComponent', () => {
     fixture.componentRef.setInput('tabs', mockTabs);
     de = fixture.debugElement;
     fixture.detectChanges();
-  });
+  };
 
-  it('should create the tabs component', () => {
+  const itShouldCreateTheComponent = () => {
     expect(component).toBeDefined();
-  });
+  };
 
-  it('should render the correct number of tab buttons', () => {
+  const itShouldRenderCorrectNumberOfTabs = () => {
     const buttons = de.queryAll(By.css('.tab-link'));
     expect(buttons.length).toBe(2);
     expect(buttons[0].nativeElement.textContent.trim()).toBe('Beginner');
     expect(buttons[1].nativeElement.textContent.trim()).toBe('Advanced');
-  });
+  };
+
+  beforeEach(createComponent);
+
+  it('should create the tabs component', itShouldCreateTheComponent);
+  it('should render the correct number of tab buttons', itShouldRenderCorrectNumberOfTabs);
 });
