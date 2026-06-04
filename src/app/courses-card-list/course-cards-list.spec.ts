@@ -32,4 +32,12 @@ describe('CoursesCardList', () => {
     const titleEl = cardTitles[0].nativeElement;
     expect(titleEl.textContent).toBe('Beginner Course');
   });
+
+  it('should display message when no courses', () => {
+    fixture.componentRef.setInput('courses', []);
+    fixture.detectChanges();
+    const divEl = fixture.nativeElement.querySelector('.no-courses') as HTMLDivElement | null;
+    expect(divEl).toBeTruthy();
+    expect(divEl!.textContent).toContain('No courses found');
+  });
 });
