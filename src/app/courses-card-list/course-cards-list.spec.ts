@@ -40,4 +40,13 @@ describe('CoursesCardList', () => {
     expect(divEl).toBeTruthy();
     expect(divEl!.textContent).toContain('No courses found');
   });
+
+  it('should open dialog when clicking the edit button', () => {
+    const button = de.query(By.css('.course-card:first-child .edit-btn'));
+    expect(button).not.toBeNull();
+    button.nativeElement.click();
+    fixture.detectChanges();
+    const form = document.querySelectorAll('.course-form');
+    expect(form, 'The edit course form should be visible.').toBeTruthy();
+  });
 });
